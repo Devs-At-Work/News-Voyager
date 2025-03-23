@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb+srv://sahilnarwalkumar01:NKAt7FJDy3gxccWc@cluster0.f42f14w.mongodb.net/');
+mongoose.connect('mongodb+srv://amangandhi164:F7no08LHdwaZKPMt@cluster0.vjvyt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
 
 app.post('/register', (req, res)=>{
     // To post / insert data into database
@@ -74,6 +74,6 @@ app.post('/updateClickedNews', async (req, res) => {
 });
 
 app.listen(3001, () => {
-    console.log("Server listining on http://127.0.0.1:3001");
+    console.log("Server listining on http://localhost:3001");
 
 });

@@ -104,7 +104,7 @@ const News = (props)=>{
 
 
     useEffect(() => {
-        document.title = `NewsOnTips - ${capitalizeFirstLetter(props.category)}`;
+        document.title = `NewsVoyager - ${capitalizeFirstLetter(props.category)}`;
         updateNews(userEmail); 
         // eslint-disable-next-line
     }, [userEmail])
@@ -174,7 +174,7 @@ const News = (props)=>{
         return (
             <>
               <NavBar/>
-                <h1 className="text-center" style={{ margin: '35px 0px', marginTop: '90px' }}>NewsOnTips - Top {capitalizeFirstLetter(props.category)} Headlines.</h1>
+                <h1 className="text-center" style={{ margin: '35px 0px', marginTop: '90px' }}>NewsVoyager - Top {capitalizeFirstLetter(props.category)} Headlines.</h1>
                 {loading && <Spinner />}
                 <InfiniteScroll
                     dataLength={articles.length}
