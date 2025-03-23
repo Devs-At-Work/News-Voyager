@@ -4,7 +4,7 @@ This project aims to develop a dynamic news website using a modern tech stack co
 
 This project aims to offer users a personalized and engaging news consumption experience.
 
-Checklist
+## Checklist
 
-- [] Mongo DB URI
+- [x] Mongo DB URI
 - [] Telegram Token
