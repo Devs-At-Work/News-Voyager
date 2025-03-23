@@ -104,14 +104,14 @@ jobs:
           cd ./News-Voyager-configs
 
           # Update backend deployment
-          yq e -i '.spec.template.spec.containers[0].image = "deepanshurawat6/backend:1.0.0-${{ github.run_number }}"' ./dev/backend-deployment.yaml
+          yq e -i '.spec.template.spec.containers[0].image = "deepanshurawat6/backend:1.0.0-${{ github.run_number }}"' ./dev/backend/backend-deployment.yaml
 
           # Update frontend deployment
-          yq e -i '.spec.template.spec.containers[0].image = "deepanshurawat6/frontend:1.0.0-${{ github.run_number }}"' ./dev/frontend-deployment.yaml
+          yq e -i '.spec.template.spec.containers[0].image = "deepanshurawat6/frontend:1.0.0-${{ github.run_number }}"' ./dev/frontend/frontend-deployment.yaml
 
           # Update all microservices deployments
           for ms in business entertainment general health science sports technology; do
-            yq e -i '.spec.template.spec.containers[0].image = "deepanshurawat6/microservices-'$ms':1.0.0-${{ github.run_number }}"' ./dev/microservices-$ms-deployment.yaml
+            yq e -i '.spec.template.spec.containers[0].image = "deepanshurawat6/microservices-'$ms':1.0.0-${{ github.run_number }}"' ./dev/microservices/$ms/microservices-$ms-deployment.yaml
           done
 
       - name: Commit and push changes
