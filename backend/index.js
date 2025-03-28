@@ -8,7 +8,25 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb+srv://amangandhi164:F7no08LHdwaZKPMt@cluster0.vjvyt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+const connectDB = async () => {
+    try {
+      const conn = await mongoose.connect('mongodb+srv://deepanshudr10:P7VtvA66JFeyTTyV@cluster0.upnjlj5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+        serverSelectionTimeoutMS: 30000,
+        connectTimeoutMS: 30000,
+        maxPoolSize: 10, // Connection pooling
+        socketTimeoutMS: 45000,
+      });
+      
+      console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      // Implement retry logic
+      console.log("Retrying connection in 5 seconds...");
+      setTimeout(connectDB, 5000);
+    }
+  };
+  
+  connectDB();
 
 app.post('/register', (req, res)=>{
     // To post / insert data into database
