@@ -10,12 +10,16 @@ app.use(cors());
 
 const connectDB = async () => {
     try {
-      const conn = await mongoose.connect('mongodb+srv://deepanshudr10:P7VtvA66JFeyTTyV@cluster0.upnjlj5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-        serverSelectionTimeoutMS: 30000,
-        connectTimeoutMS: 30000,
-        maxPoolSize: 10, // Connection pooling
-        socketTimeoutMS: 45000,
-      });
+
+        const MONGO_URI = process.env.MONGO_URI || 
+        'mongodb://admin:password@mongodb.news-voyager.svc.cluster.local:27017/newsVoyager?authSource=admin';
+
+        const conn = await mongoose.connect(MONGO_URI, {
+            serverSelectionTimeoutMS: 30000,
+            connectTimeoutMS: 30000,
+            maxPoolSize: 10, // Connection pooling
+            socketTimeoutMS: 45000,
+        });
       
       console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
@@ -26,7 +30,7 @@ const connectDB = async () => {
     }
   };
   
-  connectDB();
+connectDB();
 
 app.post('/register', (req, res)=>{
     // To post / insert data into database
@@ -45,6 +49,15 @@ app.post('/register', (req, res)=>{
     })
     
 })
+
+app.get('/health', (req, res) => {
+    // Check MongoDB connection status
+    if (mongoose.connection.readyState === 1) {
+      res.status(200).send('OK');
+    } else {
+      res.status(500).send('MongoDB connection not ready');
+    }
+  });
 
 app.post('/login', (req, res)=>{
     // To find record from the database
