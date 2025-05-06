@@ -7,7 +7,25 @@ const app = express();
 const PORT = 3012; // Or any other port you prefer
 
 // Enable CORS middleware
-app.use(cors());
+app.use(cors({
+  origin: '*', // In production, you might want to restrict this
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
+app.use('/health', (req, res, next) => {
+  // Remove /health from the path before processing
+  req.url = req.url.replace(/^\/health/, '');
+  next();
+});
+
+app.get('/', (req, res) => {
+  res.send('Microservice API is running');
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 // Define your API key and other constants
 const apiKey = "d9fc5464da754543b7c0c02b01d89913";
@@ -31,11 +49,8 @@ app.get('/news/:category', async (req, res) => {
   }
 });
 
-app.get('/health', (req, res) => {
-  res.status(200).send('OK');
-});
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on ${PORT}`);
 });
