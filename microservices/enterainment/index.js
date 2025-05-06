@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('Microservice API is running');
 });
 
-app.get('/health', (req, res) => {
+app.get('/enterainment/health', (req, res) => {
   res.status(200).send('OK');
 });
 
@@ -31,7 +31,7 @@ app.get('/health', (req, res) => {
 const apiKey = "d9fc5464da754543b7c0c02b01d89913";
 
 // Define a route to handle requests for news data
-app.get('/news/:category', async (req, res) => {
+app.get('/enterainment/news/:category', async (req, res) => {
   try {
     const category = req.params.category;
     const { page, pageSize, country } = req.query;
@@ -47,10 +47,6 @@ app.get('/news/:category', async (req, res) => {
     console.error('Error fetching news:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-});
-
-app.get('/health', (req, res) => {
-  res.status(200).send('OK');
 });
 
 // Start the server

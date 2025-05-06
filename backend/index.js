@@ -44,13 +44,8 @@ const connectDB = async () => {
 
 connectDB();
 
-// Root endpoint
-app.get('/', (req, res) => {
-  res.send('Backend API is running');
-});
-
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
   // Check MongoDB connection status
   if (mongoose.connection.readyState === 1) {
     res.status(200).send('OK');
@@ -60,7 +55,7 @@ app.get('/health', (req, res) => {
 });
 
 // Register endpoint
-app.post('/register', (req, res) => {
+app.post('/api/register', (req, res) => {
   // To post / insert data into database
   const {email, password} = req.body;
   FormDataModel.findOne({email: email})
@@ -77,7 +72,7 @@ app.post('/register', (req, res) => {
 });
 
 // Login endpoint
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   // To find record from the database
   const {email, password} = req.body;
   FormDataModel.findOne({email: email})
@@ -99,7 +94,7 @@ app.post('/login', (req, res) => {
 });
 
 // Update clicked news endpoint
-app.post('/updateClickedNews', async (req, res) => {
+app.post('/api/updateClickedNews', async (req, res) => {
   try {
     const { email, clickedNewsTitle } = req.body;
 

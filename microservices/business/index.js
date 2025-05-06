@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('Microservice API is running');
 });
 
-app.get('/health', (req, res) => {
+app.get('/business/health', (req, res) => {
   res.status(200).send('OK');
 });
 
@@ -31,7 +31,7 @@ app.get('/health', (req, res) => {
 const apiKey = "75c2b4880b1244efb81476ef24a51067";
 
 // Define a route to handle requests for news data
-app.get('/news/:category', async (req, res) => {
+app.get('/business/news/:category', async (req, res) => {
   try {
     const category = req.params.category;
     const { page, pageSize, country } = req.query;
