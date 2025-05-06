@@ -13,7 +13,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use('/enterainment', (req, res, next) => {
+app.use('/entertainment', (req, res, next) => {
   // Remove /business from the path before processing
   req.url = req.url.replace(/^\/enterainment/, '');
   next();
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('Microservice API is running');
 });
 
-app.get('/enterainment/health', (req, res) => {
+app.get('/entertainment/health', (req, res) => {
   res.status(200).send('OK');
 });
 
@@ -31,7 +31,7 @@ app.get('/enterainment/health', (req, res) => {
 const apiKey = "d9fc5464da754543b7c0c02b01d89913";
 
 // Define a route to handle requests for news data
-app.get('/enterainment/news/:category', async (req, res) => {
+app.get('/entertainment/news/:category', async (req, res) => {
   try {
     const category = req.params.category;
     const { page, pageSize, country } = req.query;

@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('Microservice API is running');
 });
 
-app.get('/health/health', (req, res) => {
+app.get('/health/healthcheck', (req, res) => {
   res.status(200).send('OK');
 });
 
