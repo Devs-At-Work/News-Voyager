@@ -10,6 +10,10 @@ export default defineConfig({
     strictPort: true,
      watch: {
        usePolling: true
-     }
+     },
+     allowedHosts: [
+      'k8s-newsvoyagergroup-3ca1d929c3-709340557.us-west-2.elb.amazonaws.com',
+      'localhost'
+    ]
   }
 })

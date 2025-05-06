@@ -13,7 +13,8 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.post( 'http://localhost:3001/register', {name, email, password})
+        // Use path-based routing with the ALB
+        axios.post('/api/register', {name, email, password})
         .then(result => {
             console.log(result);
             if(result.data === "Already registered"){
@@ -24,12 +25,11 @@ const Register = () => {
                 alert("Registered successfully! Please Login to proceed.")
                 navigate('/login');
             }
-            
         })
         .catch(err => console.log(err));
     }
 
-
+    // Component rendering remains the same
     return (
         <div>
             <div className="d-flex justify-content-center align-items-center text-center vh-100" style= {{backgroundColor: "#001726"}}>

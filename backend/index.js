@@ -6,7 +6,15 @@ const FormDataModel = require ('./models/FormData');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something went wrong!' });
+  });
+app.use(cors({
+    origin: ['http://k8s-newsvoyagergroup-3ca1d929c3-709340557.us-west-2.elb.amazonaws.com', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  }));
 
 const connectDB = async () => {
     try {
@@ -31,6 +39,10 @@ const connectDB = async () => {
   };
   
 connectDB();
+
+app.get('/', (req, res) => {
+    res.send('Backend API is running');
+  });
 
 app.post('/register', (req, res)=>{
     // To post / insert data into database
@@ -105,6 +117,6 @@ app.post('/updateClickedNews', async (req, res) => {
 });
 
 app.listen(3001, () => {
-    console.log("Server listining on http://localhost:3001");
+    console.log("Server listining on 3001");
 
 });
